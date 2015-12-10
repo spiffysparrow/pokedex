@@ -1,9 +1,10 @@
 var ApiActions = require("../actions/pokemonActions.js");
+var API = {};
 
-var fetchAllPokemons = function(){
+API.fetchAllPokemons = function(){
   $.get("api/pokemon", function(data){
     ApiActions.receiveAllPokemons(data);
   });
 };
 
-module.exports = fetchAllPokemons;
+module.exports = API;

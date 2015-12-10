@@ -28,6 +28,7 @@ var resetPokemons = function(pokemons) {
     var id = pokemon.id;
     _allPokemon[id] = pokemon;
   });
+  pokemonStore.__emitChange();
 };
 
 console.log("pokemonStore", _allPokemon);

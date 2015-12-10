@@ -1,5 +1,7 @@
 var React = require('react');
-var pokemonStore = require('../../stores/pokemon.js');
+var pokemonStore = require('../../stores/pokemon');
+var API = require('../../util/apiUtil');
+var PokemonIndexItem = require('./PokemonIndexItem');
 
 
 var pokemonIndex = React.createClass ({
@@ -8,10 +10,25 @@ var pokemonIndex = React.createClass ({
     return {pokemons: pokemonStore.all()};
   },
 
-  render: function() {
+  componentDidMount: function(){
+    API.fetchAllPokemons();
+    pokemonStore.addListener(this._onChange);
+  },
 
+  componentWillUnmount: function(){
+    pokemonStore.removeListener(this._onChange);
+  },
+
+  _onChange: function(){
+    this.setState({ pokemons: pokemonStore.all() });
+  },
+
+  render: function() {
+    var pokemonsLis = this.state.pokemons.map(function(pokemon, idx){
+      return (<PokemonIndexItem pokemon={pokemon} key={idx}/>);
+    });
     return (
-      <div>Hi</div>
+      <ul>{pokemonsLis}</ul>
     );
   }
 });

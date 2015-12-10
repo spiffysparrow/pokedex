@@ -9,9 +9,5 @@ document.addEventListener("DOMContentLoaded", function() {
 );
 
 
-var fetchAllPokemons = require("./util/apiUtil.js");
-fetchAllPokemons();
-
-
 
 window.pokemonStore = require("./stores/pokemon.js");
