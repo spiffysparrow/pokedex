@@ -31,6 +31,10 @@ var resetPokemons = function(pokemons) {
   pokemonStore.__emitChange();
 };
 
+pokemonStore.find = function(id) {
+  return _allPokemon[id];
+};
+
 console.log("pokemonStore", _allPokemon);
 
 
