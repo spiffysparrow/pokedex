@@ -1,28 +1,44 @@
 var React = require('react');
 var pokemonStore = require('../../stores/pokemon');
-
 var pokemonDetail = React.createClass ({
 
   getInitialState: function() {
-    return this.getStateFromStore();
+    return this.getStateFromStore(this.props);
   },
 
-  getStateFromStore: function() {
-    var id = parseInt(this.props.params.pokemonId);
+  getStateFromStore: function(props) {
+    var id = parseInt(props.params.pokemonId);
     var pokieState = pokemonStore.find(id);
-    // this.setState({pokemon: pokieState});
     return {pokemon: pokieState};
   },
 
+  updatePokemon: function(){
+    this.setState(this.getStateFromStore(this.props));
+  },
+
+  componentDidMount: function() {
+    pokemonStore.addListener(this.updatePokemon);
+  },
+
+  componentWillReceiveProps: function(newProps){
+    this.setState(this.getStateFromStore(newProps));
+  },
 
   render: function() {
-    // var details = {
-    //   name: this.state
-    // }
+    var details;
+    var pokemon = this.state.pokemon;
+    if (pokemon) {
+      details = <div className="detail">
+                      <h2>{pokemon.name}</h2>
+                      <img src={pokemon.image_url}/>
+                    </div>;
+      } else {
+        details = <div>Loading!</div>;
+        }
     return (
       <div>
         <div className="pokemon-detail-pane">
-          <div className="detail">{this.state.pokemon.name}</div>
+          {details}
         </div>
       </div>
     );
