@@ -10,6 +10,9 @@ pokemonStore.__onDispatch = function(payload){
     case PokemonConstants.POKEMONS_RECEIVED:
       resetPokemons(payload.pokemons);
       break;
+    case PokemonConstants.POKEMON_RECEIVED:
+      updatePokemon(payload.pokemon);
+      break;
   }
 };
 
@@ -20,6 +23,11 @@ pokemonStore.all = function() {
     pokemonArray.push(value);
   }
   return pokemonArray;
+};
+
+var updatePokemon = function(pokemon) {
+  _allPokemon[pokemon.id] = pokemon;
+  pokemonStore.__emitChange();
 };
 
 var resetPokemons = function(pokemons) {

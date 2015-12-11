@@ -8,7 +8,9 @@ var PokemonDetail = require('./components/pokemons/pokemonDetail.jsx');
 
 var routes = (
   <Route path="/" component={App}>
-    <Route path="pokemon/:pokemonId" component={PokemonDetail}></Route>
+    <Route path="pokemon/:pokemonId" component={PokemonDetail}>
+      
+    </Route>
   </Route>
 );
 

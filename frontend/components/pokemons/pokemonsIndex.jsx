@@ -1,6 +1,6 @@
 var React = require('react');
-var pokemonStore = require('../../stores/pokemon');
 var API = require('../../util/apiUtil');
+var pokemonStore = require('../../stores/pokemon');
 var PokemonIndexItem = require('./PokemonIndexItem');
 
 
@@ -11,8 +11,8 @@ var pokemonIndex = React.createClass ({
   },
 
   componentDidMount: function(){
-    API.fetchAllPokemons();
     pokemonStore.addListener(this._onChange);
+    API.fetchAllPokemons();
   },
 
   componentWillUnmount: function(){

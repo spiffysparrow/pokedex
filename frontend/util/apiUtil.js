@@ -7,4 +7,16 @@ API.fetchAllPokemons = function(){
   });
 };
 
+API.fetchSinglePokemon = function(id) {
+  $.get("api/pokemon/" + id, function(data) {
+    ApiActions.receiveSinglePokemon(data);
+  });
+};
+
+// API.fetchPokemonToys = function(pokemonId) {
+//   $.get("api/pokemon/" + id, function(data) {
+//     ApiActions.receiveSinglePokemon(data);
+//   });
+// };
+
 module.exports = API;
